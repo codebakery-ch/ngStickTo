@@ -1,4 +1,4 @@
-.directive('sticky', function ($window) {
+.directive('stick-to', function ($window) {
     return {
         restrict: 'A',
         scope: {
@@ -15,18 +15,13 @@
             parent.css('position', 'relative');
 
             //bind scroll
-            angular.element($window).bind("scroll", function () {
-
+             angular.element($window).bind("scroll", function () {
                 //check if in viewport
-                if (scope.contain == 'true') {
-                    scope.inView = this.pageYOffset >= parentOffset.top;
-                } else {
-                    scope.inView = true;
-                }
-                if (scope.inView) {
-                    scrollElm.css('position', 'absolute');
-                    scrollElm.css('top', this.pageYOffset - parentOffset.top + parseInt( scope.offset));
-                }
+                scope.inView = (scope.contain == 'true' ? this.pageYOffset >= parentOffset.top : true);
+
+                //set css
+                scrollElm.css('position', (scope.inView ? "absolute" : "relative"));
+                scrollElm.css('top', (scope.inView ? this.pageYOffset - parentOffset.top + parseInt(scope.offset) : 0));
             });
         }
     }
