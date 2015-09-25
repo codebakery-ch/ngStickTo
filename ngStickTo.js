@@ -21,7 +21,7 @@
 
                 //set css
                 scrollElm.css('position', (scope.inView ? "absolute" : "relative"));
-                scrollElm.css('top', (scope.inView ? this.pageYOffset - parentOffset.top + parseInt(scope.offset) : 0));
+                scrollElm.css('top', (scope.inView ? this.pageYOffset - parentOffset.top + parseInt(scope.offset) : parseInt(scope.offset)));
             });
         }
     }
